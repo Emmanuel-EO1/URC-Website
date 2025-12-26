@@ -1,0 +1,36 @@
+{% load static %}
+<footer class="mt-5 py-5 text-white bg-primary-base">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="">
+                <h5 class="text-accent fw-bold">Urban Realty & Consultants</h5>
+                <p class="small">Blending legacy knowledge with modern technology to deliver exceptional value in premium real estate.</p>
+                <p class="small">&copy; {% now "Y" %} Urban Realty & Consultants. All rights reserved.</p>
+            </div>
+
+            <div class="col-md-2 mb-4" data-aos="fade-up">
+                <h5 class="fw-bold footer-subhead">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-white text-decoration-none small">Home</a></li>
+                    <li><a href="{% url 'about' %}" class="text-white text-decoration-none small">About Us</a></li>
+                    <li><a href="{% url 'services' %}" class="text-white text-decoration-none small">Services</a></li>
+                    <li><a href="{% url 'contact_us' %}" class="text-white text-decoration-none small">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 mb-4" data-aos="fade-left">
+                <h5 class="fw-bold footer-subhead">Connect</h5>
+                <a href="#" class="text-accent me-3 fs-4"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-accent me-3 fs-4"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-accent me-3 fs-4"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <div class="col-md-3 mb-4" data-aos="fade-left">
+                <h5 class="fw-bold footer-subhead">Get In Touch</h5>
+                <p class="small mb-1"><i class="fas fa-phone-alt me-2 text-accent"></i> +234 800 123 4567</p>
+                <p class="small mb-1"><i class="fas fa-envelope me-2 text-accent"></i> info@urbankey.com</p>
+                <p class="small"><i class="fas fa-map-marker-alt me-2 text-accent"></i> Lagos, Nigeria</p>
+            </div>
+        </div>
+    </div>
+</footer>

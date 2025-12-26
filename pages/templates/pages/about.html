@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}URC | About Us{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 text-center section-light">
+        <div class="container py-4">
+            <h1 class="display-4 fw-bold mb-3" data-aos="fade-right">Our Heritage, Your Future</h1>
+            <p class="lead mx-auto col-lg-8" data-aos="fade-left">
+                Urban Realty and Consultants - URC is built on a foundation of integrity and an unwavering commitment to unparalleled client service. We blend legacy knowledge with modern technology to deliver exceptional value in premium real estate.
+            </p>
+        </div>
+    </section>
+
+    <section id="team" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Meet Our Team</h2>
+            <div class="row">
+                {% if team_members %}
+                    {% for member in team_members %}
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up" data-aos-delay="{{ member.aos_delay }}">
+                            <div class="card text-center h-100 border-0 shadow-sm">
+                                <img src="{% if member.photo %}{{ member.photo.url }}{% else %}{% static 'img/default_agent.jpg' %}{% endif %}" class="card-img-top rounded-circle mx-auto mt-3 team-member-photo" alt="{{ member.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">{{ member.name }}</h5>
+                                    <p class="text-muted small text-accent">{{ member.position }}</p>
+                                    <p class="card-text small">{{ member.bio|truncatechars:100 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center text-muted">No featured team members to display.</div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

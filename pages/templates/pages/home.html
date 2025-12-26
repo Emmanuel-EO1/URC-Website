@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}URC | Modern Luxury Real Estate{% endblock %}
+
+{% block content %}
+
+    <section id="hero" class="bg-dark text-white text-center py-5 hero-section-base">
+        <div class="container py-5" data-aos="fade-zoom-in" data-aos-duration="1500">
+            <h1 class="display-3 fw-bold mb-3 text-accent">Find Your Legacy Property</h1>
+            <p class="lead mb-4">The future of premium real estate, managed with prestige and structure.</p><br>
+
+            <div class="p-6 mx-auto glassmorphism-box"> 
+                <p class="mb-5">{% include 'partials/search_form.html' %}</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="featured-listings" class="py-5 section-light">
+        <div class="container">
+            <h3 class="text-center mb-5 display-4" data-aos="fade-up">Featured Listings</h3>
+            <div class="row">
+                {% if properties %}
+                    {% for property in properties %}
+                        <div class="col-md-4 mb-4" data-aos="fade-up"
+                        data-aos-delay="{{ property.aos_delay }}">
+                            <div class="card shadow-sm border-0 h-100">
+                                <img src="{% if property.main_photo %}{{ property.main_photo.url }}{% else %}{% static 'img/default.jpg' %}{% endif %}" class="card-img-top card-img-cover" alt="{{ property.title }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ property.title }}</h5>
+                                    <p class="card-text fw-bold text-accent">₦{{ property.price|intcomma }}</p> 
+                                    <p class="card-text text-muted small"><i class="fas fa-map-marker-alt"></i> {{ property.city }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center text-muted">No featured properties available.</div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

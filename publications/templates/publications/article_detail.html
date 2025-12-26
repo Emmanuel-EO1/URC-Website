@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load social_share %} 
+
+{% block title %}URC | {{ article.title }}{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <article class="p-4" data-aos="fade-right">
+                    <h1 class="display-5 fw-bold mb-3">{{ article.title }}</h1>
+                    <p class="text-muted small mb-4">
+                        By <span class="text-accent fw-bold">{{ article.author.name }}</span> on {{ article.publish_date|date:"F j, Y" }}
+                    </p>
+
+                    <img src="{% if article.photo %}{{ article.photo.url }}{% else %}{% static 'img/default_article.jpg' %}{% endif %}" 
+                        class="img-fluid rounded mb-4" alt="{{ article.title }}">
+
+                    <div class="article-body">
+                        {{ article.body|linebreaks }}
+                    </div>
+
+                    <hr class="mt-5">
+                    <div class="d-flex align-items-center">
+                        <span class="fw-bold me-3">Share:</span>
+                        {% post_to_twitter object_or_url="full" content_object=article link_text='<i class="fab fa-twitter fa-lg"></i>' %}
+                        {% post_to_facebook object_or_url="full" content_object=article link_text='<i class="fab fa-facebook-f fa-lg"></i>' %}
+                        {% post_to_linkedin object_or_url="full" content_object=article link_text='<i class="fab fa-linkedin-in fa-lg"></i>' %}
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-lg-4 section-light p-4 rounded shadow-sm" data-aos="fade-left">
+                <h5 class="fw-bold mb-3 text-accent">Recent Insights</h5>
+                <ul class="list-unstyled">
+                    {% for recent in recent_articles %}
+                        <li class="mb-3 pb-2 border-bottom">
+                            <a href="{% url 'article_detail' recent.slug %}" class="fw-bold d-block">
+                                {{ recent.title|truncatechars:60 }}
+                            </a>
+                            <span class="small text-muted">{{ recent.publish_date|date:"M d, Y" }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

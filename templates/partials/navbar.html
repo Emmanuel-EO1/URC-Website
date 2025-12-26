@@ -1,0 +1,26 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark py-3 bg-primary-base">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4 text-accent" href="{% url 'home' %}">
+            URC
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'listings' %}">Properties</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'articles' %}">Publications</a></li>
+
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-warning btn-accent ms-lg-3 px-3 py-2 fw-bold" href="{% url 'contact_us' %}">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

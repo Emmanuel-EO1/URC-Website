@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}URC | {{ property.title }}{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <h1 class="display-4 fw-bold mb-3 text-primary-base" data-aos="fade-right">{{ property.title }}</h1>
+        <p class="lead text-accent fw-bold">₦{{ property.price|intcomma }}</p>
+
+        <div class="mb-5" data-aos="fade-up">
+            <img src="{% if property.main_photo %}{{ property.main_photo.url }}{% else %}{% static 'img/default.jpg' %}{% endif %}" class="img-fluid rounded shadow-sm" alt="{{ property.title }}" style="max-height: 500px; width: 100%; object-fit: cover;">
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Description</h2>
+                <p>{{ property.description|linebreaks }}</p>
+            </div>
+
+            <div class="col-md-4 section-light p-4 rounded" data-aos="fade-left">
+                <h5 class="fw-bold">Property Agent</h5>
+                <p class="small">{{ property.agent.name }}</p>
+            </div>
+            
+            <div class="col-md-4">
+            {% include 'partials/inquiry_form.html' %}
+            </div>
+        </div>
+{% endblock %}
