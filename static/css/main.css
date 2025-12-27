@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@300;400;700&display=swap');
+/*  */
+:root {
+    --color-primary-base: #2C3E50;      /* Dark Slate/Charcoal */
+    --color-accent-gold: #B8860B;       /* Copper/Rose Gold Accent */
+    --color-white: #FFFFFF;
+    --color-light-gray: #F5F5F5;        /* Off-White Canvas */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-primary-base);
+    background-color: var(--color-light-gray);
+    overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-primary-base);
+}
+.hero-section-base{
+    background-color: var(--color-primary-base);
+}
+.section-light{
+    background-color: var(--color-light-gray);
+}
+.text-accent{
+    color: var(--color-accent-gold);
+}
+.footer-subhead{
+    color: rgba(255, 255, 255, 0.581);
+}
+.glassmorphism-box{
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(225, 225, 225, 0.1);
+    border-radius: 8px;
+}
+.card-img-cover{
+    height: 250px;
+    object-fit: cover;
+}
+.team-member-photo{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+.bg-primary-base{
+    background-color: var(--color-primary-base);
+}
+.btn-accent{
+    color: var(--color-accent-gold);
+    border-color: var(--color-accent-gold);
+}
+.btn-accent:hover{
+    color: var(--color-primary-base) !important;
+    background-color: var(--color-accent-gold);
+    border-color: var(--color-accent-gold);
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: var(--color-light-gray);
+}
+.navbar-dark .navbar-nav .nav-link:hover{
+    color: var(--color-accent-gold);
+}
