@@ -5,9 +5,18 @@ from django.db import models
 class TeamMember(models.Model):
     name= models.CharField(max_length=200)
     position= models.CharField(max_length=100)
+    ROLE_CHOICES = [
+        ('Executive', 'Executive Leadership'),
+        ('Management', 'Senior Management & Key Personnel'),
+    ]
+    role_type = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default='Management'
+    )
     bio= models.TextField(blank=True)
     photo= models.ImageField(upload_to='team/%Y/%m', blank=True)
     is_featured= models.BooleanField(default=False)
-
+    
     def __str__(self):
         return self.name

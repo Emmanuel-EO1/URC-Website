@@ -17,13 +17,19 @@ def home(request):
     return render(request, 'pages/home.html', context)
 
 def about(request):
-    team_members= TeamMember.objects.filter(is_featured=True).order_by('position')
+    executives= TeamMember.objects.filter(role_type='Executive', is_featured=True).order_by('id')
 
-    for idx, prop in enumerate(team_members):
+    management= TeamMember.objects.filter(role_type='Management', is_featured=True).order_by('id')
+
+    for idx, prop in enumerate(executives):
+        prop.aos_delay= (idx + 1) * 200
+
+    for idx, prop in enumerate(management):
         prop.aos_delay= (idx + 1) * 200
 
     context= {
-        'team_members': team_members,
+        'executives': executives,
+        'management': management,
     }
 
     return render(request, 'pages/about.html', context)

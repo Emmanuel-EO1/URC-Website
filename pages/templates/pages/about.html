@@ -6,36 +6,107 @@
 
 {% block content %}
 
-    <section class="py-5 text-center section-light">
-        <div class="container py-4">
-            <h5 class="display-4 fw-bold mb-3" data-aos="fade-right">Our Heritage, Your Future</h5>
+    <section class="py-5 section-light">
+        <div class="container text-center py-4">
+            <h1 class="display-4 fw-bold mb-4" data-aos="fade-right">Our Heritage, Your Future</h1>
             <p class="lead mx-auto col-lg-8" data-aos="fade-left">
                 Urban Realty and Consultants - URC is built on a foundation of integrity and an unwavering commitment to unparalleled client service. We blend legacy knowledge with modern technology to deliver exceptional value in premium real estate.
             </p>
         </div>
+
+        <div class="container py-4" data-aos="fade-up">
+            <h1 class="display-5 fw-bold mb-6 text-center" data-aos="">About URC</h1>
+            <h2 class="mb-6" data-aos="">Who We Are</h2>
+            <p class="lead" data-aos="">URC is a forward-thinking real estate company built on professionalism, market intelligence, and a deep understanding of property value across local and international markets. We specialize in connecting people to spaces that elevate their lifestyle, secure their investments, and support long-term growth. From residential homes and luxury properties to investment-grade assets, URC approaches every transaction with precision, transparency, and care.</p>
+            <p class="lead" data-aos="">Founded to bridge the gap between property owners, investors, and end users, URC operates with a clear focus: delivering real estate solutions that are not only profitable, but sustainable and well-informed. Our team combines market research, on-ground expertise, and client-focused service to ensure every decision is backed by insight and integrity. <br>
+            URC serves a diverse client base including first-time buyers, seasoned investors, landlords, tenants, and diaspora clients seeking trusted representation and guidance in unfamiliar markets.</p>
+
+            <h2 class="mb-6" data-aos="">Our Vision</h2>
+            <p class="lead" data-aos="">To become a globally respected real estate brand known for trust, intelligence, and long-term value creation. URC envisions a future where property transactions are seamless, transparent, and driven by data-backed decisions, empowering clients to build wealth and stability through real estate.</p>
+
+            <h2 class="mb-6" data-aos="">Our Mission</h2>
+            <p class="lead" data-aos="">Our mission is to provide comprehensive real estate services that prioritize client interests, market accuracy, and ethical practices. We aim to simplify complex property processes, offer strategic guidance, and deliver outcomes that exceed expectations—whether through sales, leasing, property management, or advisory services.</p>
+
+            <h2 class="mb-6" data-aos="">Our Core Values</h2>
+            <p class="lead col-lg-8" data-aos=""><strong class="text-accent">Integrity:</strong> We operate with honesty and accountability in every transaction.</p>
+            <p class="lead col-lg-8" data-aos=""><strong class="text-accent">Expertise:</strong> We rely on research, experience, and continuous learning to stay ahead of the market.</p>
+            <p class="lead col-lg-8" data-aos=""><strong class="text-accent">Client-Centered Service:</strong> Every solution is tailored to our clients' unique goals and circumstances.</p>
+            <p class="lead col-lg-8" data-aos=""><strong class="text-accent">Transparency:</strong> Clear communication and full disclosure are central to how we work.</p>
+            <p class="lead col-lg-8" data-aos=""><strong class="text-accent">Excellence:</strong> We pursue high standards in service delivery, presentation, and results.</p>
+        </div>
     </section>
 
-    <section id="team" class="py-5">
+    <section id="about" class="py-5 section-light">
+        <div class="container py-4 text-center" data-aos="fade-up">
+            <h2 class="display-6 fw-bold mb-4" data-aos="fade-right">Why Choose URC</h2>
+            <p class="lead mx-auto col-lg-8" data-aos=""><strong>URC stands out through a combination of strategic insight and personalized service. We do not simply list properties—we position them correctly, market them effectively, and negotiate with purpose. Our understanding of location dynamics, pricing trends, and buyer behavior allows us to deliver real results.<br>Clients choose URC for our professionalism, responsiveness, and ability to manage transactions end-to-end. From initial consultation to final handover, we remain actively involved, ensuring clarity, confidence, and peace of mind throughout the process.</strong></p>
+        </div>
+
+        <div class="container py-4 col-lg-10 mx-auto" data-aos="fade-up">
+            <h2 class="mb-6" data-aos="">Markets We Serve</h2>
+            <p class="lead mx-auto" data-aos="">
+                <strong>URC operates across key local and international markets, with a strong presence in major urban and investment-focused locations.<br> Our services support:</strong>
+                <p class="lead" data-aos="">
+                    <ul>
+                        <li> Residential buyers and renters.</li>
+                        <li> Property owners and landlords</li>
+                        <li> Local and diaspora investors</li>
+                        <li> Corporate and executive clients</li>
+                    </ul>
+                </p>
+                <strong>Through trusted partnerships and market intelligence, we help clients navigate opportunities across cities and regions with confidence.</strong>
+            </p>
+        </div>
+    </section>
+
+    <section id="team" class="py-5 section-light">    
         <div class="container">
-            <h2 class="text-center mb-5" data-aos="fade-up">Meet Our Team</h2>
-            <div class="row">
-                {% if team_members %}
-                    {% for member in team_members %}
-                        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up" data-aos-delay="{{ member.aos_delay }}">
-                            <div class="card text-center h-100 border-0 shadow-sm">
+            <h1 class="text-center mb-5" data-aos="fade-up">Meet Our Team</h1>
+            <h3 class="text-center mb-4" data-aos="fade-right">Executive Leadership</h3>
+            <div class="row justify-content-center">
+                {% if executives %}
+                    {% for member in executives %}
+                        <div class="col-md-6 mb-4" data-aos="zoom-in-up" data-aos-delay="{{ member.aos_delay }}">
+                            <div class="card text-center h-100 border-0 shadow-sm" >
                                 <img src="{% if member.photo %}{{ member.photo.url }}{% else %}{% static 'img/default_agent.jpg' %}{% endif %}" class="card-img-top rounded-circle mx-auto mt-3 team-member-photo" alt="{{ member.name }}">
                                 <div class="card-body">
-                                    <h5 class="card-title fw-bold">{{ member.name }}</h5>
-                                    <p class="text-muted small text-accent">{{ member.position }}</p>
-                                    <p class="card-text small">{{ member.bio|truncatechars:100 }}</p>
+                                    <h4 class="card-title fw-bold">{{ member.name }}</h4>
+                                    <p class="text-muted fw-bold small text-accent">{{ member.position }}</p>
+                                    <p class="card-text small text-center">{{ member.bio|truncatechars:300 }}</p>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 {% else %}
-                    <div class="col-12 text-center text-muted">No featured team members to display.</div>
+                    <div class="col-12 text-center text-muted">No Leadership members found.</div>
                 {% endif %}
+
+                
+                <div class="row justify-content-center">
+                    {% if management %}
+                    <h3 class="text-center mt-5 mb-4" data-aos="fade-right">Senior Management & Key Personnel</h3>
+                        {% for member in management %}
+                         
+                            <div class="col-md-3 mb-4" data-aos="zoom-in-up" data-aos-delay="{{ member.aos_delay }}">
+                            <div class="card text-center h-100 border-0 shadow-sm" >
+                                <img src="{% if member.photo %}{{ member.photo.url }}{% else %}{% static 'img/default_agent.jpg' %}{% endif %}" class="card-img-top rounded-circle mx-auto mt-3 team-member-photo" alt="{{ member.name }}">
+                                <div class="card-body">
+                                    <h4 class="card-title fw-bold">{{ member.name }}</h4>
+                                    <p class="text-muted fw-bold small text-accent">{{ member.position }}</p>
+                                    <p class="card-text small text-center">{{ member.bio|truncatechars:300 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
+
+            <h2 class="mb-6" data-aos="">Our Team Culture</h2>
+            <p class="lead" data-aos="">At URC, collaboration and professionalism define our internal culture. Our team is composed of experienced professionals who share a commitment to excellence, continuous improvement, and ethical practice. We believe strong teamwork translates into better outcomes for our clients.</p>
+
+            <h2 class="mb-6" data-aos="">Our Commitment</h2>
+            <p class="lead" data-aos="">URC is committed to building long-term relationships founded on trust, performance, and transparency. Whether you are buying, selling, renting, or investing, our team is dedicated to guiding you with clarity and confidence at every stage of your real estate journey.</p>
         </div>
     </section>
 
