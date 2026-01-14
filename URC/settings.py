@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
-import certifi
 # import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
@@ -57,15 +56,16 @@ if ENV == 'production':
             'PASSWORD': os.getenv('DB_PASSWORD'),
             'HOST': os.getenv('DB_HOST'),
             'PORT': os.getenv('DB_PORT'),
-            'OPTIONS': {
-                'ssl': {
-                    'ca': certifi.where(),
-                },
-                'charset': 'utf8mb4',
-            },
         }
     }
-    
+
+if os.getenv('ENV') != 'local':
+    import certifi
+    DATABASES['default']['OPTIONS'] = {
+        'ssl': {
+            'ca': certifi.where()
+        }
+    }
 
 # Application definition
 
