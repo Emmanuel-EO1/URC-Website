@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
-import dj_database_url
+# import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -57,9 +57,7 @@ if ENV == 'production':
             'HOST': os.getenv('DB_HOST'),
             'PORT': os.getenv('DB_PORT'),
             'OPTIONS': {
-                'ssl': {
-                    'ca': None
-                },
+                'ssl': True,
                 'charset': 'utf8mb4',
             },
         }
