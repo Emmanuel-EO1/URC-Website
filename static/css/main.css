@@ -75,3 +75,14 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-8px);
     transition: var(--transition);
 }
+.hr-luxury{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--color-accent-gold), rgba(0, 0, 0, 0));
+    margin: 3rem 0;
+    opacity: 0.6;
+}
+.hr-charcoal{
+    border: 1px solid rgba(0, 0, 0, 0.825);
+    margin: 2rem 8rem;
+}

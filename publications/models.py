@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 # Create your models here.
 
 class Article(models.Model):
@@ -11,8 +12,11 @@ class Article(models.Model):
     publish_date = models.DateTimeField(default=timezone.now)
     is_published = models.BooleanField(default=True)
 
+    def get_absolute_url(self):
+        return reverse('publications:article_detail', kwargs={'slug': self.slug})
+    
     class Meta:
-        ordering = ('-publish_date',) 
+        ordering = ('publish_date',) 
         verbose_name_plural = "Articles & Publications"
 
     def __str__(self):

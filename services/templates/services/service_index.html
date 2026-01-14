@@ -8,14 +8,16 @@
     <div class="container" py-5>
         <h1 class="display-5 fw-bold text-center mb-3" data-aos="fade-down" style="margin-top: 50px;">Our Premium Services</h1>
         <p class="lead text-center mb-5 mx-auto col-lg-8">
-            Beyond brokerage, URC provides expert advisory, valuation, and portfolio management services tailored to the high-net-worth investor.
+            URC offers a comprehensive range of real estate services designed to support property owners, investors, buyers, and tenants at every stage of the property lifecycle. Our services are built on market intelligence, professional execution, and a commitment to delivering measurable value.<br>
+
+            Each service below is structured exactly as it appears in the URC admin system and can be activated or deactivated as needed.
         </p>
 
         <div class="row">
             {% if services %}
                 {% for service in services %}
                     <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ service.aos_delay }}">
-                       <div class="card h-100 p-3">
+                       <div class="card h-100 border-0 p-3">
                             <div class="card-body text-center">
                                 <i class="fas fa-briefcase fa-3x text-accent mb-3"></i>
                                 <h5 class="card-title fw-bold">{{ service.title }}</h5>

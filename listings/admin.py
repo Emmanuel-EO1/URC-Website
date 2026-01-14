@@ -10,7 +10,7 @@ class PropertyImageInline(admin.TabularInline):
 
 class PropertyAdmin(admin.ModelAdmin):
     # What columns to show in the listings table overview
-    list_display= ('id', 'title', 'price', 'is_featured', 'is_published', 'list_date', 'agent')
+    list_display= ('id', 'title', 'currency', 'price', 'is_featured', 'is_published', 'list_date', 'agent')
     # Make the title clickable to edit
     list_display_links= ('id', 'title')
     # Add a search bar to quickly find properties by title or address or city
@@ -18,7 +18,7 @@ class PropertyAdmin(admin.ModelAdmin):
     # Add filters on the right sidebar to quickly narrow down listings
     list_filter= ('category', 'property_type', 'is_featured', 'is_published', 'city', 'agent')
     # Add an action dropdown 
-    list_editable= ('is_published', 'is_featured')
+    list_editable= ('is_published', 'is_featured', 'currency', 'price')
     # Automatically generate the slug from the title as the agent types
     prepopulated_fields= {'slug': ('title',)}
 

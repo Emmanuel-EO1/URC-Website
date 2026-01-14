@@ -36,6 +36,18 @@ class Property(models.Model):
     address= models.CharField(max_length=300)
     city= models.CharField(max_length=50, default='Lagos')
     description= models.TextField(blank=True)
+
+    CURRENCY_CHOICES = [
+        ('₦', 'NGN - Nigerian Naira'),
+        ('$', 'USD - US Dollar'),
+        ('€', 'EUR - Euro'),
+        ('£', 'GBP - British Pound'),
+        ('¥', 'JPY - Japanese Yen'),
+        ('GH₵', 'GHS - Ghanaian Cedi'),
+    ]
+
+    currency= models.CharField(max_length=5,choices=CURRENCY_CHOICES,default='₦')
+
     price= models.DecimalField(max_digits=14, decimal_places=2)
     bedrooms= models.IntegerField(default=0)
     bathrooms= models.IntegerField(default=0)

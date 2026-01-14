@@ -7,7 +7,7 @@
 {% block content %}
     <div class="container py-5">
         <h1 class="display-4 fw-bold mb-3 text-primary-base" data-aos="fade-right">{{ property.title }}</h1>
-        <p class="lead text-accent fw-bold">₦{{ property.price|intcomma }}</p>
+        <p class="lead text-accent fw-bold">{{ property.currency }}{{ property.price|intcomma }}</p>
 
         <div class="mb-5" data-aos="fade-up">
             <img src="{% if property.main_photo %}{{ property.main_photo.url }}{% else %}{% static 'img/default.jpg' %}{% endif %}" class="img-fluid rounded shadow-sm" alt="{{ property.title }}" style="max-height: 500px; width: 100%; object-fit: cover;">
