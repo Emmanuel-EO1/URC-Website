@@ -41,12 +41,12 @@ else:
 
 
 if ENV == 'production':
-    DATABASES = {
-        'default': dj_database_url.config(default=os.getenv('DATABASE_URL')
-        )
-    }
+#     DATABASES = {
+#         'default': dj_database_url.config(default=os.getenv('DATABASE_URL')
+#         )
+#     }
 
-else:
+# else:
 
     DATABASES = {
         'default': {
@@ -56,6 +56,12 @@ else:
             'PASSWORD': os.getenv('DB_PASSWORD'),
             'HOST': os.getenv('DB_HOST'),
             'PORT': os.getenv('DB_PORT'),
+            'OPTIONS': {
+                'ssl': {
+                    'ca': None
+                },
+                'charset': 'utf8mb4',
+            },
         }
     }
     
