@@ -57,7 +57,7 @@ if ENV == 'production':
             'HOST': os.getenv('DB_HOST'),
             'PORT': os.getenv('DB_PORT'),
             'OPTIONS': {
-                'ssl': True,
+                'ssl': {},
                 'charset': 'utf8mb4',
             },
         }
