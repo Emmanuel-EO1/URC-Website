@@ -75,8 +75,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_social_share',
@@ -178,7 +176,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 USE_CLOUDINARY = os.environ.get('USE_CLOUDINARY') == '1'
 
 if USE_CLOUDINARY:
-    
+    INSTALLED_APPS.insert(0, 'cloudinary_storage')
+    INSTALLED_APPS.append('cloudinary')
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
     CLOUDINARY_STORAGE = {
