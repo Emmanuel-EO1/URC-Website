@@ -70,12 +70,14 @@ if os.getenv('ENV') != 'local':
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
     'django.contrib.humanize',
     'django_social_share',
     'crispy_forms',
@@ -172,24 +174,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-USE_CLOUDINARY = os.environ.get('USE_CLOUDINARY') == '1'
-
-if USE_CLOUDINARY:
-    # Insert at the very top to override default static handling
-    if 'cloudinary_storage' not in INSTALLED_APPS:
-        INSTALLED_APPS.insert(0, 'cloudinary_storage')
-    if 'cloudinary' not in INSTALLED_APPS:
-        INSTALLED_APPS.append('cloudinary')
-    
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-    }
-
 # Outside the if/else so they are always defined
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -199,5 +183,23 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Force WhiteNoise to handle CSS so Cloudinary doesn't break the styling
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+USE_CLOUDINARY = os.environ.get('USE_CLOUDINARY') == '1'
+
+if USE_CLOUDINARY:
+    # Insert at the very top to override default static handling
+    # if 'cloudinary_storage' not in INSTALLED_APPS:
+    #     INSTALLED_APPS.insert(0, 'cloudinary_storage')
+    # if 'cloudinary' not in INSTALLED_APPS:
+    #     INSTALLED_APPS.append('cloudinary')
+    
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+    }
+
 
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
