@@ -176,17 +176,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 USE_CLOUDINARY = os.environ.get('USE_CLOUDINARY') == '1'
 
 if USE_CLOUDINARY:
-    INSTALLED_APPS.insert(0, 'cloudinary_storage')
-    INSTALLED_APPS.append('cloudinary')
+    # Insert at the very top to override default static handling
+    if 'cloudinary_storage' not in INSTALLED_APPS:
+        INSTALLED_APPS.insert(0, 'cloudinary_storage')
+    if 'cloudinary' not in INSTALLED_APPS:
+        INSTALLED_APPS.append('cloudinary')
+    
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
     CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
     }
-else:
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR / 'media'
+
+# Outside the if/else so they are always defined
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'  # Cloudinary needs this as a fallback/prefix
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Force WhiteNoise to handle CSS so Cloudinary doesn't break the styling
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
