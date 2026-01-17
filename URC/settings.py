@@ -174,8 +174,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Tell Django where the raw CSS is 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+if ENV == "local":
+    STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Force WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
