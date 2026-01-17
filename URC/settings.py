@@ -103,13 +103,14 @@ if os.getenv('ENV') != 'local':
 # Application definition
 
 INSTALLED_APPS = [
-    'cloudinary_storage',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'cloudinary',
     'django.contrib.humanize',
     'django_social_share',
