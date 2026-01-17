@@ -19,14 +19,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -99,8 +91,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -176,32 +168,28 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Outside the if/else so they are always defined
+# Standard Paths
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = '/media/'  # Cloudinary needs this as a fallback/prefix
-MEDIA_ROOT = BASE_DIR / 'media'
+# Tell Django where the raw CSS is 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-# Force WhiteNoise to handle CSS so Cloudinary doesn't break the styling
+# Force WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-USE_CLOUDINARY = os.environ.get('USE_CLOUDINARY') == '1'
+# Cloudinary Logic
+USE_CLOUDINARY = os.getenv('USE_CLOUDINARY') == '1'
 
 if USE_CLOUDINARY:
-    # Insert at the very top to override default static handling
-    # if 'cloudinary_storage' not in INSTALLED_APPS:
-    #     INSTALLED_APPS.insert(0, 'cloudinary_storage')
-    # if 'cloudinary' not in INSTALLED_APPS:
-    #     INSTALLED_APPS.append('cloudinary')
-    
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
     CLOUDINARY_STORAGE = {
         'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
         'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
         'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+        'SECURE': True, # Forces HTTPS for images
     }
-
 
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
