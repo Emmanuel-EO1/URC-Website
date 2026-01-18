@@ -36,39 +36,6 @@ if ENV == 'production':
 else:
     ALLOWED_HOSTS = ['*']
 
-# Standard Paths
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    ]
-
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder', # This finds static inside apps
-]
-
-if ENV == "production":
-    # Force WhiteNoise
-    WHITENOISE_MANIFEST_STRICT = False
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-else:
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-# Cloudinary Logic
-USE_CLOUDINARY = os.getenv('USE_CLOUDINARY') == '1'
-
-if USE_CLOUDINARY:
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-    }
-
-CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases    
@@ -136,6 +103,44 @@ MIDDLEWARE = [
 ]
 
 
+# Standard Paths
+
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    ]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder', # This finds static inside apps
+]
+
+if ENV == "production":
+    # Force WhiteNoise
+    WHITENOISE_MANIFEST_STRICT = False
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+# Cloudinary Logic
+USE_CLOUDINARY = os.getenv('USE_CLOUDINARY') == '1'
+
+if USE_CLOUDINARY:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+    }
+
+CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 ROOT_URLCONF = 'URC.urls'
