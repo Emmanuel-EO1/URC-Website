@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@300;400;700&display=swap');
+/*  */
+:root {
+    --color-primary-base: #2C3E50;      /* Dark Slate/Charcoal */
+    --color-accent-gold: #886409;       /* Copper/Rose Gold Accent */
+    --color-white: #FFFFFF;
+    --color-light-gray: #F5F5F5;        /* Off-White Canvas */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Roboto', sans-serif;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-primary-base);
+    background-color: var(--color-light-gray);
+    overflow-x: hidden !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-primary-base);
+}
+.hero-section-base{
+    background-color: var(--color-primary-base);
+}
+.section-light{
+    background-color: var(--color-light-gray);
+    margin-bottom: -50px;
+}
+.text-accent{
+    color: var(--color-accent-gold);
+}
+.footer-subhead{
+    color: rgba(255, 255, 255, 0.581);
+}
+.glassmorphism-box{
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(225, 225, 225, 0.1);
+    border-radius: 8px;
+}
+.card-img-cover{
+    height: 250px;
+    object-fit: cover;
+}
+.team-member-photo{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.bg-primary-base{
+    background-color: var(--color-primary-base);
+}
+.btn-accent{
+    color: var(--color-accent-gold);
+    border-color: var(--color-accent-gold);
+}
+.btn-accent:hover{
+    color: var(--color-primary-base) !important;
+    background-color: var(--color-accent-gold);
+    border-color: var(--color-accent-gold);
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: var(--color-light-gray);
+}
+.navbar-dark .navbar-nav .nav-link:hover{
+    color: var(--color-accent-gold);
+}
+.card{
+    background-color: rgba(255, 255, 255, 0.525);
+    border-radius: 10px;
+}
+.card:hover{
+    background-color: rgba(225, 225, 225, 0.414);
+    transform: translateY(-8px);
+    transition: var(--transition);
+}
+.hr-luxury{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--color-accent-gold), rgba(0, 0, 0, 0));
+    margin: 3rem 0;
+    opacity: 0.6;
+}
+.hr-charcoal{
+    border: 1px solid rgba(0, 0, 0, 0.825);
+    margin: 2rem 8rem;
+}
