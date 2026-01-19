@@ -170,10 +170,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    str(BASE_DIR / 'static')
     ]
 
 STATICFILES_FINDERS = [
@@ -186,7 +186,7 @@ if ENV == 'production':
     WHITENOISE_MANIFEST_STRICT = False
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Cloudinary Logic
 USE_CLOUDINARY = os.getenv('USE_CLOUDINARY') == '1'
