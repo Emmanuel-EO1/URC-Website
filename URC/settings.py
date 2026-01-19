@@ -110,7 +110,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [str(BASE_DIR / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -170,16 +170,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    str(BASE_DIR / 'static')
     ]
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder', # This finds static inside apps
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+
+# STATICFILES_IGNORE_PATTERNS = []
 
 if ENV == 'production':
     # Force WhiteNoise
@@ -200,6 +202,15 @@ if USE_CLOUDINARY:
     }
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = str(BASE_DIR / 'media')
 
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+
+# # Temporary debug prints (remove after testing)
+# print("BASE_DIR =", BASE_DIR)
+# print("STATICFILES_DIRS =", STATICFILES_DIRS)
+# print("STATICFILES_FINDERS =", STATICFILES_FINDERS)
+# import os
+# print("Static dir exists:", os.path.exists(BASE_DIR / 'static'))
+# print("Static dir contents:", os.listdir(BASE_DIR / 'static') if os.path.exists(BASE_DIR / 'static') else "N/A")
+# print("BASE_DIR =", BASE_DIR)
