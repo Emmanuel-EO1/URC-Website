@@ -26,6 +26,16 @@ h1, h2, h3, h4, h5, h6 {
 .section-light{
     background-color: var(--color-light-gray);
     margin-bottom: -50px;
+    overflow: hidden;
+}
+select[name="property"], 
+.select.form-select {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .text-accent{
     color: var(--color-accent-gold);
@@ -97,4 +107,34 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: contain;
     margin: 0 auto;
     image-rendering: -webkit-optimize-contrast;
+}
+.share-section{
+    border-top: 1px solid #f0f0f0;
+    margin-right: 2rem;
+    display: flex;
+} 
+.share-section div[class^="-this"] a{
+    text-decoration: none;
+    color: #555;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+}
+.facebook-this a:hover {
+    color: #064aa3 !important;
+    transform: translateY(-5px);
+}
+.whatsapp-this a:hover {
+    color: #25D366 !important;
+    transform: translateY(-5px);
+}
+.twitter-this a:hover {
+    color: #000000 !important;
+    transform: translateY(-5px);
+}
+.linkedin-this a:hover {
+    color: #0A66C2 !important;
+    transform: translateY(-5px);
+}
+.share-section div[class^="-this"] a:active{
+    transform: scale(0.9);
 }

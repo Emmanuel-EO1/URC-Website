@@ -23,13 +23,12 @@
                     </div>
 
                     <hr class="mt-5">
-                    <div class="d-flex align-items-center">
+                    <div class="share-section align-items-center">
                         <span class="fw-bold me-3">Share:</span>
+                        {% post_to_facebook request.build_absolute_uri  '<i class="fab fa-facebook-f fa-lg"></i>' %}<br>
+                        {% post_to_whatsapp request.build_absolute_uri  '<i class="fab fa-whatsapp fa-lg"></i>' %}<br>
                         {% post_to_twitter request.build_absolute_uri article.get_absolute_url '<i class="fab fa-twitter fa-lg"></i>' %}<br>
-                        {% post_to_facebook request.build_absolute_uri article.get_absolute_url '<i class="fab fa-facebook-f fa-lg"></i>' %}<br>
-                        {% post_to_whatsapp request.build_absolute_uri article.get_absolute_url '<i class="fab fa-whatsapp fa-lg"></i>' %}<br>
-                        <!-- <a href="{% post_to_linkedin request.build_absolute_uri article.get_absolute_url %}" target="_blank" class="ms-2 text-decoration-none"> 
-                            <i class="fab fa-linkedin-in fa-lg"></i></a> -->
+                        <!-- {% post_to_linkedin request.build_absolute_uri '<i class="fab fa-linkedin-in fa-lg"></i>' %}     -->
                     </div>
                 </article>
             </div>
