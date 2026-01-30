@@ -89,6 +89,7 @@ INSTALLED_APPS = [
     'services.apps.ServicesConfig',
     'publications.apps.PublicationsConfig',
     'contacts.apps.ContactsConfig',
+    'background_task',
 ]
 
 MIDDLEWARE = [
@@ -203,3 +204,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+
+# Background Tasks
+# SMTP Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')

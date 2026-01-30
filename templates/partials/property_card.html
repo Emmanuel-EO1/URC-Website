@@ -4,7 +4,7 @@
 <div class="card shadow-sm border-0 h-100" data-aos="fade-up" data-aos-delay="{% if forloop.counter0 %}{{ forloop.counter0.aos_delay }}{% endif %}">
 
     <div class="position-relative">
-        <a href="{% url 'listing_detail' property.slug%}"><img src="{% if property.main_photo %}{{ property.main_photo.url }}{% else %}{% static 'img/default.jpg' %}{% endif %}" 
+        <a href="{% url 'listing_detail' property.slug %}"><img src="{% if property.main_photo %}{{ property.main_photo.url }}{% else %}{% static 'img/default.jpg' %}{% endif %}" 
             class="card-img-top card-img-cover" alt="{{ property.title }}"></a>
 
         {% if property.is_featured %}

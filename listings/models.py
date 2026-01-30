@@ -42,6 +42,7 @@ class Property(models.Model):
         ('$', 'USD - US Dollar'),
         ('€', 'EUR - Euro'),
         ('£', 'GBP - British Pound'),
+        ('C$', 'CAD - Canadian Dollar'),
         ('¥', 'JPY - Japanese Yen'),
         ('GH₵', 'GHS - Ghanaian Cedi'),
     ]
