@@ -10,20 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
-# import dj_database_url
+import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+# Load environment variables safely
+ENV = os.getenv('ENV', 'local')
+
+# Only load local .env file if we are not in production to prevent environment hijacking
+if ENV != 'production':
+    load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-ENV = os.getenv('ENV', 'local')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -37,36 +39,43 @@ else:
     ALLOWED_HOSTS = ['*']
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases    
+# ==============================================================================
+# DATABASE CONFIGURATION (LOCAL VS PRODUCTION)
+# ==============================================================================
 
-
-# if ENV == 'production':
-# #     DATABASES = {
-# #         'default': dj_database_url.config(default=os.getenv('DATABASE_URL')
-# #         )
-# #     }
-
-# # else:
-
-DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('DB_ENGINE'),
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+if ENV == 'production':
+    # Production: Seamlessly parse the single DATABASE_URL from Render
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.getenv('DATABASE_URL'),
+            conn_max_age=600,
+        )
     }
-}
+    
+    # Explicitly force the mysql-connector engine for TiDB Cloud URLs
+    if DATABASES['default'] and DATABASES['default']['ENGINE'] == 'django.db.backends.mysql':
+        DATABASES['default']['ENGINE'] = 'mysql.connector.django'
 
-if os.getenv('ENV') != 'local':
+    # Production SSL settings required by TiDB Cloud
     import certifi
     DATABASES['default']['OPTIONS'] = {
         'ssl': {
             'ca': certifi.where()
         }
     }
+else:
+    # Local Development: Keeps your standalone local parameters intact
+    DATABASES = {
+        'default': {
+            'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.mysql'),
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+            'PORT': os.getenv('DB_PORT', '3306'),
+        }
+    }
+
 
 # Application definition
 
@@ -126,7 +135,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'URC.wsgi.application'
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -158,38 +166,37 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Standard Paths
+
+# ==============================================================================
+# STATIC & MEDIA FILES CONFIGURATION
+# ==============================================================================
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = str(BASE_DIR / 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
-    str(BASE_DIR / 'static')
-    ]
+    BASE_DIR / 'static'
+]
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder', # This finds static inside apps
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
 if ENV == 'production':
-    # Force WhiteNoise
+    # Force safe WhiteNoise collection for production
     WHITENOISE_MANIFEST_STRICT = False
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+    # Use standard storage locally to bypass manifest asset-missing errors
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-# Cloudinary Logic
+# Cloudinary Logic for Media Uploads
 USE_CLOUDINARY = os.getenv('USE_CLOUDINARY') == '1'
 
 if USE_CLOUDINARY:
@@ -201,11 +208,18 @@ if USE_CLOUDINARY:
     }
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
-CSRF_TRUSTED_ORIGINS = ['https://*.railway.app', 'https://*.onrender.com']
 
-# Background Tasks
+# ==============================================================================
+# SECURITY & EXTRA CONFIGURATIONS
+# ==============================================================================
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app', 
+    'https://*.onrender.com'
+]
+
 # SMTP Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
