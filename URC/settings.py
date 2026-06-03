@@ -44,6 +44,10 @@ else:
 # ==============================================================================
 
 if ENV == 'production':
+
+    import pymysql
+    pymysql.install_as_MySQLdb()
+    
     # Production: Seamlessly parse the single DATABASE_URL from Render
     DATABASES = {
         'default': dj_database_url.config(
