@@ -192,9 +192,8 @@ STATICFILES_FINDERS = [
 ]
 
 if ENV == 'production':
-    # Force safe WhiteNoise collection for production
     WHITENOISE_MANIFEST_STRICT = False
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 else:
     # Use standard storage locally to bypass manifest asset-missing errors
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
