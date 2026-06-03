@@ -44,10 +44,10 @@ else:
 # ==============================================================================
 
 if ENV == 'production':
-
+    # Safely install pymysql as the MySQLdb driver handler to bypass Oracle driver bugs
     import pymysql
     pymysql.install_as_MySQLdb()
-    
+
     # Production: Seamlessly parse the single DATABASE_URL from Render
     DATABASES = {
         'default': dj_database_url.config(
@@ -56,9 +56,9 @@ if ENV == 'production':
         )
     }
     
-    # Explicitly force the mysql-connector engine for TiDB Cloud URLs
-    if DATABASES['default'] and DATABASES['default']['ENGINE'] == 'django.db.backends.mysql':
-        DATABASES['default']['ENGINE'] = 'mysql.connector.django'
+    # Force the standard django mysql engine (pymysql will act behind it)
+    if DATABASES['default']:
+        DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
 
     # Production SSL settings required by TiDB Cloud
     import certifi
@@ -79,7 +79,6 @@ else:
             'PORT': os.getenv('DB_PORT', '3306'),
         }
     }
-
 
 # Application definition
 
