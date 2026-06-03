@@ -6,7 +6,7 @@ from django.utils import timezone
 class Agent(models.Model):
     name = models.CharField(max_length=200)
     role = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='agents/%Y/%m/', blank=True)
+    photo = models.ImageField(upload_to='agents/%Y/%m/', blank=True, max_length=255)
     phone_number = models.CharField(max_length=15)
     email = models.EmailField()
 
@@ -53,7 +53,7 @@ class Property(models.Model):
     bedrooms= models.IntegerField(default=0)
     bathrooms= models.IntegerField(default=0)
 
-    main_photo= models.ImageField(upload_to='properties/%Y/%m/%d', blank=True)
+    main_photo= models.ImageField(upload_to='properties/%Y/%m/%d', blank=True, max_length=255)
     
     is_featured= models.BooleanField(default=False, verbose_name='Display on Homepage')
     is_published= models.BooleanField(default=True)
@@ -68,7 +68,7 @@ class Property(models.Model):
     
 class PropertyImage(models.Model):
     property= models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
-    image= models.ImageField(upload_to='properties/extra/%Y/%m/%d')
+    image= models.ImageField(upload_to='properties/extra/%Y/%m/%d', max_length=255)
 
     def __str__(self):
         return f'Image for {self.property.title}'

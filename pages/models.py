@@ -15,7 +15,7 @@ class TeamMember(models.Model):
         default='Management'
     )
     bio= models.TextField(blank=True)
-    photo= models.ImageField(upload_to='team/%Y/%m', blank=True)
+    photo= models.ImageField(upload_to='team/%Y/%m', blank=True, max_length=255)
     is_featured= models.BooleanField(default=False)
     
     def __str__(self):

@@ -8,7 +8,7 @@ class Article(models.Model):
     slug = models.SlugField(max_length=250, unique=True)
     author = models.CharField(max_length=100, default='URC Staff')
     body = models.TextField()
-    cover_image = models.ImageField(upload_to='publications/%Y/%m/', blank=True)
+    cover_image = models.ImageField(upload_to='publications/%Y/%m/', blank=True, max_length=255)
     publish_date = models.DateTimeField(default=timezone.now)
     is_published = models.BooleanField(default=True)
 
