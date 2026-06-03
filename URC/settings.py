@@ -202,7 +202,14 @@ else:
 USE_CLOUDINARY = os.getenv('USE_CLOUDINARY') == '1'
 
 if USE_CLOUDINARY:
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    STORAGES = {
+        "default": {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
     CLOUDINARY_STORAGE = {
         'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
         'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
